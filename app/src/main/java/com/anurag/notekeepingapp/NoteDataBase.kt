@@ -11,7 +11,7 @@ import androidx.room.Database
 @Database(entities = [NoteEntity::class], version = 1, exportSchema = false)
 abstract class NoteDataBase : RoomDatabase() {
 
-    abstract fun wordDao(): NoteDao
+    abstract fun noteDao(): NoteDao
 
     companion object {
         // Singleton prevents multiple instances of database opening at the
