@@ -29,7 +29,7 @@ class RecyclerViewAdapter(private val listener: OnTapHandler) :
 
         val viewHolder = ViewHolder(view)
         viewHolder.imageButton.setOnClickListener {
-            listener.onItemClick(dataSet[viewHolder.adapterPosition].note)
+            listener.onItemClick(dataSet[viewHolder.adapterPosition])
         }
         return viewHolder
     }
@@ -55,5 +55,5 @@ class RecyclerViewAdapter(private val listener: OnTapHandler) :
 }
 
 interface OnTapHandler {
-    fun onItemClick(noteText: String)
+    fun onItemClick(note: NoteEntity)
 }

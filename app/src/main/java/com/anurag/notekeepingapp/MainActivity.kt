@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity(), OnTapHandler {
         }
     }
 
-    override fun onItemClick(noteText: String) {
-        viewModel.delete(NoteEntity(note = noteText))
+    override fun onItemClick(note: NoteEntity) {
+        viewModel.delete(note)
     }
 }
