@@ -3,7 +3,7 @@ package com.anurag.notekeepingapp
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
@@ -18,7 +18,7 @@ class RecyclerViewAdapter(private val listener: OnTapHandler) :
      */
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val textView: TextView = view.findViewById(R.id.note_view)
-        val imageButton: ImageButton = view.findViewById(R.id.delete_button)
+        val imageButton: ImageView = view.findViewById(R.id.delete_button)
     }
 
     // Create new views (invoked by the layout manager)
