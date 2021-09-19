@@ -8,7 +8,9 @@ import com.anurag.notekeepingapp.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity(), OnTapHandler {
     private lateinit var binding: ActivityMainBinding
 
-    private val viewModel: NotesViewModel by viewModels()
+    private val viewModel: NotesViewModel by viewModels {
+        NotesViewModelFactory((application as NoteApplication).repository)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
 

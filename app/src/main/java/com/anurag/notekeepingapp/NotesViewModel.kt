@@ -1,13 +1,12 @@
 package com.anurag.notekeepingapp
 
-import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class NotesViewModel(private val repository: NoteRepository, application: Application) :
+class NotesViewModel(private val repository: NoteRepository) :
     ViewModel() {
     val allNotes = repository.allNotes.asLiveData()
 
