@@ -1,5 +1,6 @@
 package com.anurag.notekeepingapp
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -8,7 +9,7 @@ import com.anurag.notekeepingapp.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity(), OnTapHandler {
     private lateinit var binding: ActivityMainBinding
 
-    private val viewModel: NotesViewModel by viewModels {
+    private val viewModel: MainViewModel by viewModels {
         NotesViewModelFactory((application as NoteApplication).repository)
     }
 
@@ -29,14 +30,12 @@ class MainActivity : AppCompatActivity(), OnTapHandler {
 
     }
 
-    fun addNewNote(view: android.view.View) {
-        val noteText = binding.addNoteView.text.toString()
-        if (noteText.isNotEmpty()) {
-            viewModel.insert(NoteEntity(note = noteText))
-        }
-    }
-
     override fun onItemClick(note: NoteEntity) {
         viewModel.delete(note)
+    }
+
+    fun addNewNoteButtonClicked(view: android.view.View) {
+        val intent = Intent(this, NoteEditActivity::class.java)
+        startActivity(intent)
     }
 }

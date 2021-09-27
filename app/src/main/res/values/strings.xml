@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Note Keeping App</string>
+    <string name="write_the_note_here">Write the note here...</string>
+    <string name="add_button">Add Button</string>
 </resources>
