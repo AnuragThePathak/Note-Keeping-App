@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NoteKeepingApp">
         <activity
-            android:name=".NoteEditActivity"
+            android:name=".ui.NoteEditActivity"
             android:exported="true" />
         <activity
             android:name=".MainActivity"

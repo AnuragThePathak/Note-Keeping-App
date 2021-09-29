@@ -3,6 +3,8 @@ package com.anurag.notekeepingapp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.anurag.notekeepingapp.data.NoteEntity
+import com.anurag.notekeepingapp.data.NoteRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

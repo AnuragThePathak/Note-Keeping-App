@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.NoteEditActivity">
+    tools:context=".ui.EditNoteFragment">
 
     <EditText
         android:id="@+id/add_note_view"
@@ -16,4 +16,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="This is where note is edited." />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

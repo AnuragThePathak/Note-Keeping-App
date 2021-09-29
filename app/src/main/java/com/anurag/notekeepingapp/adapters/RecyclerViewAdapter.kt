@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.anurag.notekeepingapp.data.NoteEntity
 
 class RecyclerViewAdapter(private val listener: OnTapHandler) :
     RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {

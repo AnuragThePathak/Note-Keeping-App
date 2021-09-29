@@ -1,11 +1,9 @@
-package com.anurag.notekeepingapp
+package com.anurag.notekeepingapp.data
 
 import android.content.Context
-import androidx.room.Room
-
-import androidx.room.RoomDatabase
-
 import androidx.room.Database
+import androidx.room.Room
+import androidx.room.RoomDatabase
 
 // Annotates class to be a Room Database with a table (entity) of the Word class
 @Database(entities = [NoteEntity::class], version = 1, exportSchema = false)

@@ -1,4 +1,4 @@
-package com.anurag.notekeepingapp
+package com.anurag.notekeepingapp.data
 
 import androidx.room.*
 import kotlinx.coroutines.flow.Flow
