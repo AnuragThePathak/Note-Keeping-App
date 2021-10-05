@@ -9,10 +9,11 @@ import androidx.fragment.app.viewModels
 import com.anurag.notekeepingapp.EditNoteViewModel
 import com.anurag.notekeepingapp.EditNoteViewModelFactory
 import com.anurag.notekeepingapp.NoteApplication
+import com.anurag.notekeepingapp.R
 import com.anurag.notekeepingapp.data.NoteEntity
 import com.anurag.notekeepingapp.databinding.FragmentEditNoteBinding
 
-class EditNoteFragment : Fragment() {
+class EditNoteFragment : Fragment(R.layout.fragment_edit_note) {
     private var _binding: FragmentEditNoteBinding? = null
 
     // This property is only valid between onCreateView and

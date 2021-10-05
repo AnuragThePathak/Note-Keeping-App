@@ -11,7 +11,7 @@ import com.anurag.notekeepingapp.*
 import com.anurag.notekeepingapp.data.NoteEntity
 import com.anurag.notekeepingapp.databinding.FragmentNoteListBinding
 
-class NoteListFragment : Fragment(), OnTapHandler {
+class NoteListFragment : Fragment(R.layout.fragment_note_list), OnTapHandler {
 
     private var _binding: FragmentNoteListBinding? = null
 
