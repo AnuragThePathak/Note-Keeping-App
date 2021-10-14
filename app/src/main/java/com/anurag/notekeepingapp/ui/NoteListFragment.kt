@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
 import com.anurag.notekeepingapp.NoteApplication
 import com.anurag.notekeepingapp.adapters.RecyclerViewAdapter
 import com.anurag.notekeepingapp.databinding.FragmentNoteListBinding
@@ -39,6 +41,12 @@ class NoteListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val navController = findNavController()
+        val appBarConfiguration = AppBarConfiguration(navController.graph)
+
+        binding.toolbar
+            .setupWithNavController(navController, appBarConfiguration)
+
         val adapter = RecyclerViewAdapter { note ->
             viewModel.delete(note)
         }
@@ -54,7 +62,7 @@ class NoteListFragment : Fragment() {
         binding.floatingActionButton.setOnClickListener {
             val action = NoteListFragmentDirections
                 .actionNoteListDestToEditNoteFragment()
-            findNavController().navigate(action)
+            navController.navigate(action)
         }
     }
 
