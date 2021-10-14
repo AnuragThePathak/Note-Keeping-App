@@ -1,18 +1,18 @@
-package com.anurag.notekeepingapp
+package com.anurag.notekeepingapp.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.anurag.notekeepingapp.data.NoteEntity
+import com.anurag.notekeepingapp.data.Note
 import com.anurag.notekeepingapp.data.NoteRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class NoteListViewModel(private val repository: NoteRepository) : ViewModel() {
-    val allNotes = repository.allNotes.asLiveData()
+    val allNotes = repository.getAllNotes().asLiveData()
 
-    fun delete(note: NoteEntity) = viewModelScope.launch(Dispatchers.IO) {
+    fun delete(note: Note) = viewModelScope.launch(Dispatchers.IO) {
         repository.delete(note)
     }
 }

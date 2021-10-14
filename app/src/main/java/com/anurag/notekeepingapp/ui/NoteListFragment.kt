@@ -7,11 +7,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.anurag.notekeepingapp.*
-import com.anurag.notekeepingapp.data.NoteEntity
+import com.anurag.notekeepingapp.NoteApplication
+import com.anurag.notekeepingapp.adapters.RecyclerViewAdapter
 import com.anurag.notekeepingapp.databinding.FragmentNoteListBinding
+import com.anurag.notekeepingapp.viewmodels.NoteListViewModel
+import com.anurag.notekeepingapp.viewmodels.NoteListViewModelFactory
 
-class NoteListFragment : Fragment(R.layout.fragment_note_list), OnTapHandler {
+class NoteListFragment : Fragment() {
 
     private var _binding: FragmentNoteListBinding? = null
 
@@ -37,7 +39,10 @@ class NoteListFragment : Fragment(R.layout.fragment_note_list), OnTapHandler {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = RecyclerViewAdapter(this)
+        val adapter = RecyclerViewAdapter { note ->
+            viewModel.delete(note)
+        }
+
         binding.myRecyclerView.adapter = adapter
 
         viewModel.allNotes.observe(viewLifecycleOwner, { notes ->
@@ -47,16 +52,14 @@ class NoteListFragment : Fragment(R.layout.fragment_note_list), OnTapHandler {
         })
 
         binding.floatingActionButton.setOnClickListener {
-            findNavController().navigate(R.id.action_note_list_dest_to_editNoteFragment)
+            val action = NoteListFragmentDirections
+                .actionNoteListDestToEditNoteFragment()
+            findNavController().navigate(action)
         }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    override fun onItemClick(note: NoteEntity) {
-        viewModel.delete(note)
     }
 }

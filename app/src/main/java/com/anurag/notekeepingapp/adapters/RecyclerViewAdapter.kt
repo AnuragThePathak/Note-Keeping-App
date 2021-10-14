@@ -1,4 +1,4 @@
-package com.anurag.notekeepingapp
+package com.anurag.notekeepingapp.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,12 +6,13 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.anurag.notekeepingapp.data.NoteEntity
+import com.anurag.notekeepingapp.R
+import com.anurag.notekeepingapp.data.Note
 
-class RecyclerViewAdapter(private val listener: OnTapHandler) :
+class RecyclerViewAdapter(private val listener: (Note) -> Unit) :
     RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
 
-    private val dataSet = ArrayList<NoteEntity>()
+    private val dataSet = ArrayList<Note>()
 
     /**
      * Provide a reference to the type of views that you are using
@@ -30,7 +31,7 @@ class RecyclerViewAdapter(private val listener: OnTapHandler) :
 
         val viewHolder = ViewHolder(view)
         viewHolder.imageButton.setOnClickListener {
-            listener.onItemClick(dataSet[viewHolder.adapterPosition])
+            listener(dataSet[viewHolder.adapterPosition])
         }
         return viewHolder
     }
@@ -46,15 +47,11 @@ class RecyclerViewAdapter(private val listener: OnTapHandler) :
     // Return the size of your dataset (invoked by the layout manager)
     override fun getItemCount() = dataSet.size
 
-    fun updateNotes(notes: List<NoteEntity>) {
+    fun updateNotes(notes: List<Note>) {
         dataSet.clear()
         dataSet += notes
 
         notifyDataSetChanged()
     }
 
-}
-
-interface OnTapHandler {
-    fun onItemClick(note: NoteEntity)
 }

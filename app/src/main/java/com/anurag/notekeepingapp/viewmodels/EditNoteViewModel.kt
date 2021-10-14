@@ -1,17 +1,21 @@
-package com.anurag.notekeepingapp
+package com.anurag.notekeepingapp.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.anurag.notekeepingapp.data.NoteEntity
+import com.anurag.notekeepingapp.data.Note
 import com.anurag.notekeepingapp.data.NoteRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class EditNoteViewModel(private val repository: NoteRepository) : ViewModel() {
 
-    fun insert(note: NoteEntity) = viewModelScope.launch(Dispatchers.IO) {
+    fun insert(note: Note) = viewModelScope.launch(Dispatchers.IO) {
         repository.insert(note)
+    }
+
+    fun update(note: Note) = viewModelScope.launch(Dispatchers.IO) {
+        repository.update(note)
     }
 }
 

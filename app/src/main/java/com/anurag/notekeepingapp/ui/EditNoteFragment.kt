@@ -6,14 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.anurag.notekeepingapp.EditNoteViewModel
-import com.anurag.notekeepingapp.EditNoteViewModelFactory
 import com.anurag.notekeepingapp.NoteApplication
-import com.anurag.notekeepingapp.R
-import com.anurag.notekeepingapp.data.NoteEntity
+import com.anurag.notekeepingapp.data.Note
 import com.anurag.notekeepingapp.databinding.FragmentEditNoteBinding
+import com.anurag.notekeepingapp.viewmodels.EditNoteViewModel
+import com.anurag.notekeepingapp.viewmodels.EditNoteViewModelFactory
 
-class EditNoteFragment : Fragment(R.layout.fragment_edit_note) {
+class EditNoteFragment : Fragment() {
     private var _binding: FragmentEditNoteBinding? = null
 
     // This property is only valid between onCreateView and
@@ -38,7 +37,7 @@ class EditNoteFragment : Fragment(R.layout.fragment_edit_note) {
 
         val noteText = binding.addNoteView.text.toString()
         if (noteText.isNotEmpty()) {
-            viewModel.insert(NoteEntity(note = noteText))
+            viewModel.insert(Note(note = noteText))
         }
     }
 
