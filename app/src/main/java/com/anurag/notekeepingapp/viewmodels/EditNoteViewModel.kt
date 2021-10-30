@@ -1,14 +1,16 @@
 package com.anurag.notekeepingapp.viewmodels
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.anurag.notekeepingapp.data.Note
 import com.anurag.notekeepingapp.data.NoteRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class EditNoteViewModel(private val repository: NoteRepository) : ViewModel() {
+@HiltViewModel
+class EditNoteViewModel @Inject constructor(private val repository: NoteRepository) : ViewModel() {
 
     fun insert(note: Note) = viewModelScope.launch(Dispatchers.IO) {
         repository.insert(note)
@@ -16,15 +18,5 @@ class EditNoteViewModel(private val repository: NoteRepository) : ViewModel() {
 
     fun update(note: Note) = viewModelScope.launch(Dispatchers.IO) {
         repository.update(note)
-    }
-}
-
-class EditNoteViewModelFactory(private val repository: NoteRepository) : ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(EditNoteViewModel::class.java)) {
-            @Suppress("UNCHECKED_CAST")
-            return EditNoteViewModel(repository) as T
-        }
-        throw IllegalArgumentException("Unknown ViewModel class")
     }
 }

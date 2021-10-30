@@ -9,12 +9,12 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
-import com.anurag.notekeepingapp.NoteApplication
 import com.anurag.notekeepingapp.adapters.RecyclerViewAdapter
 import com.anurag.notekeepingapp.databinding.FragmentNoteListBinding
 import com.anurag.notekeepingapp.viewmodels.NoteListViewModel
-import com.anurag.notekeepingapp.viewmodels.NoteListViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class NoteListFragment : Fragment() {
 
     private var _binding: FragmentNoteListBinding? = null
@@ -22,12 +22,7 @@ class NoteListFragment : Fragment() {
     // This property is only valid between onCreateView and onDestroyView
     private val binding get() = _binding!!
 
-    private val viewModel: NoteListViewModel by viewModels {
-        NoteListViewModelFactory(
-            (activity?.application as NoteApplication)
-                .repository
-        )
-    }
+    private val viewModel: NoteListViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,

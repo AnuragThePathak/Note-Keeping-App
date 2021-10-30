@@ -6,12 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.anurag.notekeepingapp.NoteApplication
 import com.anurag.notekeepingapp.data.Note
 import com.anurag.notekeepingapp.databinding.FragmentEditNoteBinding
 import com.anurag.notekeepingapp.viewmodels.EditNoteViewModel
-import com.anurag.notekeepingapp.viewmodels.EditNoteViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class EditNoteFragment : Fragment() {
     private var _binding: FragmentEditNoteBinding? = null
 
@@ -19,9 +19,7 @@ class EditNoteFragment : Fragment() {
 // onDestroyView.
     private val binding get() = _binding!!
 
-    private val viewModel: EditNoteViewModel by viewModels {
-        EditNoteViewModelFactory((activity?.application as NoteApplication).repository)
-    }
+    private val viewModel: EditNoteViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
