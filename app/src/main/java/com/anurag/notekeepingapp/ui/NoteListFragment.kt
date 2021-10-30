@@ -7,8 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupWithNavController
 import com.anurag.notekeepingapp.adapters.RecyclerViewAdapter
 import com.anurag.notekeepingapp.databinding.FragmentNoteListBinding
 import com.anurag.notekeepingapp.viewmodels.NoteListViewModel
@@ -37,10 +35,6 @@ class NoteListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val navController = findNavController()
-        val appBarConfiguration = AppBarConfiguration(navController.graph)
-
-        binding.toolbar
-            .setupWithNavController(navController, appBarConfiguration)
 
         val adapter = RecyclerViewAdapter { note ->
             viewModel.delete(note)

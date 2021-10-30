@@ -1,7 +1,6 @@
-package com.anurag.notekeepingapp.data.db
+package com.anurag.notekeepingapp.data
 
 import androidx.room.*
-import com.anurag.notekeepingapp.data.Note
 import kotlinx.coroutines.flow.Flow
 
 @Dao

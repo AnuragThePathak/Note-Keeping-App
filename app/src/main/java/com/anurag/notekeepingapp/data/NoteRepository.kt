@@ -1,7 +1,6 @@
 package com.anurag.notekeepingapp.data
 
 import androidx.annotation.WorkerThread
-import com.anurag.notekeepingapp.data.db.NoteDao
 import javax.inject.Inject
 import javax.inject.Singleton
 
