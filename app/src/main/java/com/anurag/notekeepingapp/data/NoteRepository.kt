@@ -19,7 +19,8 @@ class NoteRepository @Inject constructor(private val noteDao: NoteDao) {
     @WorkerThread
     suspend fun update(note: Note) = noteDao.update(note)
 
-    fun getNoteById(id: Int) = noteDao.getNoteById(id)
+    @WorkerThread
+    suspend fun getNoteById(id: Int) = noteDao.getNoteById(id)
 
     fun getAllNotes() = noteDao.loadAllNotes()
 }

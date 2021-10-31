@@ -15,7 +15,7 @@ interface NoteDao {
     suspend fun update(note: Note)
 
     @Query("SELECT * FROM note_table WHERE id = :id")
-    fun getNoteById(id: Int): Flow<Note>
+    suspend fun getNoteById(id: Int): Note
 
     @Query("SELECT * FROM note_table")
     fun loadAllNotes(): Flow<List<Note>>

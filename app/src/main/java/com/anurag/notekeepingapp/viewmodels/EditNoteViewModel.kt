@@ -1,6 +1,9 @@
 package com.anurag.notekeepingapp.viewmodels
 
-import androidx.lifecycle.*
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.anurag.notekeepingapp.data.Note
 import com.anurag.notekeepingapp.data.NoteRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,8 +21,11 @@ class EditNoteViewModel @Inject constructor(
     var note = MutableLiveData<Note>()
 
     init {
-        if (noteId.value != -1) note = repository.getNoteById(noteId.value!!)
-            .asLiveData() as MutableLiveData<Note>
+        if (noteId.value != -1) {
+            viewModelScope.launch(Dispatchers.IO) {
+                note.postValue(repository.getNoteById(noteId.value!!))
+            }
+        }
     }
 
     fun insert(note: Note) = viewModelScope.launch(Dispatchers.IO) {

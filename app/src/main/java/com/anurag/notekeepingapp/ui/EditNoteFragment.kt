@@ -27,15 +27,9 @@ class EditNoteFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentEditNoteBinding.inflate(inflater, container, false)
+        binding.viewmodel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        viewModel.note.observe(viewLifecycleOwner, { note ->
-            binding.addNoteView.setText(note.note)
-        })
     }
 
     override fun onStop() {
