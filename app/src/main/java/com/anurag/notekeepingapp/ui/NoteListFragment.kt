@@ -50,7 +50,7 @@ class NoteListFragment : Fragment() {
 
         binding.floatingActionButton.setOnClickListener {
             val action = NoteListFragmentDirections
-                .actionNoteListDestToEditNoteFragment()
+                .actionNoteListDestToEditNoteDest()
             navController.navigate(action)
         }
     }

@@ -30,6 +30,14 @@ class EditNoteFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        viewModel.note.observe(viewLifecycleOwner, { note ->
+            binding.addNoteView.setText(note.note)
+        })
+    }
+
     override fun onStop() {
         super.onStop()
 

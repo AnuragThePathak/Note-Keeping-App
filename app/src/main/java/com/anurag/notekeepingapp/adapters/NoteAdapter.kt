@@ -1,12 +1,15 @@
 package com.anurag.notekeepingapp.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.anurag.notekeepingapp.data.Note
 import com.anurag.notekeepingapp.databinding.ListItemNoteBinding
+import com.anurag.notekeepingapp.ui.NoteListFragmentDirections
 
 
 class NoteAdapter(private val onClick: (Note) -> Unit) :
@@ -33,6 +36,19 @@ class NoteAdapter(private val onClick: (Note) -> Unit) :
         private val onClick: (Note) -> Unit
     ) :
         RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            itemView.setOnClickListener {
+                navigateToNote(adapterPosition, it)
+            }
+        }
+
+        private fun navigateToNote(position: Int, view: View) {
+            val direction = NoteListFragmentDirections
+                .actionNoteListDestToEditNoteDest(getItem(position).id)
+
+            view.findNavController().navigate(direction)
+        }
 
         fun bind(item: Note) {
             binding.apply {

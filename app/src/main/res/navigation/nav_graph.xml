@@ -9,23 +9,21 @@
     <fragment
         android:id="@+id/note_list_dest"
         android:name="com.anurag.notekeepingapp.ui.NoteListFragment"
-        android:label="note_list_fragment"
         tools:layout="@layout/fragment_note_list">
 
         <action
-            android:id="@+id/action_note_list_dest_to_editNoteFragment"
+            android:id="@+id/action_note_list_dest_to_edit_note_dest"
             app:destination="@id/edit_note_dest" />
     </fragment>
 
     <fragment
         android:id="@+id/edit_note_dest"
         android:name="com.anurag.notekeepingapp.ui.EditNoteFragment"
-        android:label="fragment_edit_note"
         tools:layout="@layout/fragment_edit_note">
+
         <argument
-            android:name="passed_id"
-            app:argType="string"
-            android:defaultValue="@null"
-            app:nullable="true" />
+            android:name="note_id"
+            app:argType="integer"
+            android:defaultValue="-1" />
     </fragment>
 </navigation>
