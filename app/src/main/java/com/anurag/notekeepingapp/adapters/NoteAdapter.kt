@@ -18,7 +18,7 @@ class NoteAdapter(private val onClick: (Note) -> Unit) :
         return NoteViewHolder(
             ListItemNoteBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
-            )
+            ), onClick
         )
 
     }
@@ -28,7 +28,10 @@ class NoteAdapter(private val onClick: (Note) -> Unit) :
         holder.bind(item)
     }
 
-    inner class NoteViewHolder(private val binding: ListItemNoteBinding) :
+    inner class NoteViewHolder(
+        private val binding: ListItemNoteBinding,
+        private val onClick: (Note) -> Unit
+    ) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Note) {
