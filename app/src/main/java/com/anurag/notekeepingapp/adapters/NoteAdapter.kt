@@ -1,0 +1,52 @@
+package com.anurag.notekeepingapp.adapters
+
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
+import com.anurag.notekeepingapp.data.Note
+import com.anurag.notekeepingapp.databinding.ListItemNoteBinding
+
+
+class NoteAdapter(private val onClick: (Note) -> Unit) :
+    ListAdapter<Note, NoteAdapter.NoteViewHolder>(NoteDiffCallBack) {
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):
+            NoteViewHolder {
+
+        return NoteViewHolder(
+            ListItemNoteBinding.inflate(
+                LayoutInflater.from(parent.context), parent, false
+            )
+        )
+
+    }
+
+    override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
+        val item = getItem(position)
+        holder.bind(item)
+    }
+
+    inner class NoteViewHolder(private val binding: ListItemNoteBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(item: Note) {
+            binding.apply {
+                noteView.text = item.note
+                deleteButton.setOnClickListener {
+                    onClick(item)
+                }
+            }
+        }
+    }
+
+}
+
+private object NoteDiffCallBack : DiffUtil.ItemCallback<Note>() {
+    override fun areItemsTheSame(oldItem: Note, newItem: Note): Boolean =
+        oldItem.id == newItem.id
+
+    override fun areContentsTheSame(oldItem: Note, newItem: Note): Boolean =
+        oldItem == newItem
+}

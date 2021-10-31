@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.anurag.notekeepingapp.adapters.RecyclerViewAdapter
+import com.anurag.notekeepingapp.adapters.NoteAdapter
 import com.anurag.notekeepingapp.databinding.FragmentNoteListBinding
 import com.anurag.notekeepingapp.viewmodels.NoteListViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,15 +36,15 @@ class NoteListFragment : Fragment() {
 
         val navController = findNavController()
 
-        val adapter = RecyclerViewAdapter { note ->
-            viewModel.delete(note)
+        val adapter = NoteAdapter {
+            viewModel.delete(it)
         }
 
         binding.myRecyclerView.adapter = adapter
 
         viewModel.allNotes.observe(viewLifecycleOwner, { notes ->
             notes?.let {
-                adapter.updateNotes(notes)
+                adapter.submitList(it)
             }
         })
 

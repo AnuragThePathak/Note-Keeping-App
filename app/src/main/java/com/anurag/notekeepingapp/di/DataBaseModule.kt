@@ -2,7 +2,7 @@ package com.anurag.notekeepingapp.di
 
 import android.content.Context
 import com.anurag.notekeepingapp.data.NoteDao
-import com.anurag.notekeepingapp.data.NoteDataBase
+import com.anurag.notekeepingapp.data.NoteDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,12 +16,12 @@ object DataBaseModule {
 
     @Singleton
     @Provides
-    fun provideDatabase(@ApplicationContext context: Context): NoteDataBase {
-        return NoteDataBase.getDatabase(context)
+    fun provideDatabase(@ApplicationContext context: Context): NoteDatabase {
+        return NoteDatabase.getDatabase(context)
     }
 
     @Provides
-    fun provideNoteDao(database: NoteDataBase): NoteDao {
+    fun provideNoteDao(database: NoteDatabase): NoteDao {
         return database.noteDao()
     }
 }

@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 
 // Annotates class to be a Room Database with a table (entity) of the Word class
 @Database(entities = [Note::class], version = 2, exportSchema = false)
-abstract class NoteDataBase : RoomDatabase() {
+abstract class NoteDatabase : RoomDatabase() {
 
     abstract fun noteDao(): NoteDao
 
@@ -15,15 +15,15 @@ abstract class NoteDataBase : RoomDatabase() {
         // Singleton prevents multiple instances of database opening at the
         // same time.
         @Volatile
-        private var INSTANCE: NoteDataBase? = null
+        private var INSTANCE: NoteDatabase? = null
 
-        fun getDatabase(context: Context): NoteDataBase {
+        fun getDatabase(context: Context): NoteDatabase {
             // if the INSTANCE is not null, then return it,
             // if it is, then create the database
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
-                    NoteDataBase::class.java,
+                    NoteDatabase::class.java,
                     "note_database"
                 ).fallbackToDestructiveMigration().build()
                 INSTANCE = instance
