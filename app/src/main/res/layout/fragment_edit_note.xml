@@ -19,7 +19,7 @@
             android:id="@+id/add_note_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{viewmodel.note.note}"
+            android:text="@={viewmodel.note.title}"
             android:hint="@string/write_the_note_here"
             android:importantForAutofill="no"
             android:inputType="text"

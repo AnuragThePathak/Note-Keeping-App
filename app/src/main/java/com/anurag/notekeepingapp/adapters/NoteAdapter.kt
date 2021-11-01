@@ -52,7 +52,7 @@ class NoteAdapter(private val onClick: (Note) -> Unit) :
 
         fun bind(item: Note) {
             binding.apply {
-                noteView.text = item.note
+                noteView.text = item.title
                 deleteButton.setOnClickListener {
                     onClick(item)
                 }

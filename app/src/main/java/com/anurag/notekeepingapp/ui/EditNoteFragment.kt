@@ -37,7 +37,7 @@ class EditNoteFragment : Fragment() {
 
         val noteText = binding.addNoteView.text.toString()
         if (noteText.isNotEmpty()) {
-            viewModel.insert(Note(note = noteText))
+            viewModel.insert(Note(title = noteText))
         }
     }
 
