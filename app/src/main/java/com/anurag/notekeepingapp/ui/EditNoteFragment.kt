@@ -46,8 +46,4 @@ class EditNoteFragment : Fragment() {
         _binding = null
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-    }
-
 }

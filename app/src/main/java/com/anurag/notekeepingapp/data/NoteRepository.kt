@@ -11,9 +11,7 @@ import javax.inject.Singleton
 class NoteRepository @Inject constructor(private val noteDao: NoteDao) {
 
     @WorkerThread
-    suspend fun finalSubmit(note: Note) {
-        if (note.title == "") noteDao.delete(note)
-    }
+    suspend fun insert(note: Note) = noteDao.insert(note)
 
     @WorkerThread
     suspend fun update(note: Note) = noteDao.update(note)

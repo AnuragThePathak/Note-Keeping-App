@@ -25,27 +25,35 @@ class EditNoteViewModel @Inject constructor(
      */
 
     init {
-        note.value = Note(title = "")
-
-        if (noteId.value != -1) {
+        if (noteId.value == -1) note.value = Note(title = "")
+        else {
             viewModelScope.launch(Dispatchers.IO) {
                 note.postValue(repository.getNoteById(noteId.value!!))
             }
-
-//            noteId.value = note.value!!.id
-//            println(noteId.value)
         }
     }
 
-    fun submit() {
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.finalSubmit(note.value!!)
-        }
-    }
-
-    fun update() {
-        viewModelScope.launch(Dispatchers.IO) {
+    fun update() = viewModelScope.launch(Dispatchers.IO) {
+        if (noteId.value == -1) {
+            val key = repository.insert(note.value!!).toInt()
+            noteId.postValue(key)
+            note.value!!.id = key
+        } else {
             repository.update(note.value!!)
         }
+    }
+
+
+    fun submit() {
+        if (note.value!!.title == "") {
+            viewModelScope.launch(Dispatchers.IO) {
+                repository.delete(note.value!!)
+            }
+        }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        println(note.value)
     }
 }
