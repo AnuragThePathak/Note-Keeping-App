@@ -59,4 +59,8 @@ class NoteListFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+    }
 }

@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.anurag.notekeepingapp.data.Note
 import com.anurag.notekeepingapp.databinding.FragmentEditNoteBinding
 import com.anurag.notekeepingapp.viewmodels.EditNoteViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,7 +25,10 @@ class EditNoteFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentEditNoteBinding.inflate(inflater, container, false)
+        _binding = FragmentEditNoteBinding.inflate(
+            inflater, container,
+            false
+        )
         binding.viewmodel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
@@ -34,16 +36,18 @@ class EditNoteFragment : Fragment() {
 
     override fun onStop() {
         super.onStop()
-
-        val noteText = binding.addNoteView.text.toString()
-        if (noteText.isNotEmpty()) {
-            viewModel.insert(Note(title = noteText))
-        }
+        viewModel.update()  // We must do updating part here because
+        // onDestroy and onDestroyView are not called when app is killed.
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+        viewModel.submit()
         _binding = null
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
     }
 
 }
