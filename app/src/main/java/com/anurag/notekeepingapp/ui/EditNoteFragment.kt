@@ -36,13 +36,12 @@ class EditNoteFragment : Fragment() {
 
     override fun onStop() {
         super.onStop()
-        viewModel.update()  // We must do updating part here because
+        viewModel.submitNote()  // We must do updating part here because
         // onDestroy and onDestroyView are not called when app is killed.
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        viewModel.submit()
         _binding = null
     }
 

@@ -11,16 +11,28 @@ import javax.inject.Singleton
 class NoteRepository @Inject constructor(private val noteDao: NoteDao) {
 
     @WorkerThread
-    suspend fun insert(note: Note) = noteDao.insert(note)
+    suspend fun initializeNote(noteId: Int): Note =
+        if (noteId == -1) Note(title = "")
+        else noteDao.getNoteById(noteId)
 
     @WorkerThread
-    suspend fun update(note: Note) = noteDao.update(note)
+    suspend fun submit(note: Note, noteId: Int) =
+        if (note.title != "") {
+            if (noteId == -1) {
+                note.id = noteDao.insert(note).toInt()
+                note.id
+            } else {
+                noteDao.update(note)
+                noteId
+            }
+        } else {
+            noteDao.delete(note)
+            note.id = 0
+            -1
+        }
 
     @WorkerThread
     suspend fun delete(note: Note) = noteDao.delete(note)
-
-    @WorkerThread
-    suspend fun getNoteById(id: Int) = noteDao.getNoteById(id)
 
     fun getAllNotes() = noteDao.loadAllNotes()
 }
