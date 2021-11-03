@@ -36,9 +36,7 @@ class NoteListFragment : Fragment() {
 
         val navController = findNavController()
 
-        val adapter = NoteAdapter {
-            viewModel.delete(it)
-        }
+        val adapter = NoteAdapter()
 
         binding.myRecyclerView.adapter = adapter
 
@@ -60,7 +58,4 @@ class NoteListFragment : Fragment() {
         _binding = null
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-    }
 }

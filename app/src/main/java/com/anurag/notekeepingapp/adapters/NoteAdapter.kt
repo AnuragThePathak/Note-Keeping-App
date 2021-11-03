@@ -12,7 +12,7 @@ import com.anurag.notekeepingapp.databinding.ListItemNoteBinding
 import com.anurag.notekeepingapp.ui.NoteListFragmentDirections
 
 
-class NoteAdapter(private val onClick: (Note) -> Unit) :
+class NoteAdapter :
     ListAdapter<Note, NoteAdapter.NoteViewHolder>(NoteDiffCallBack) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):
@@ -21,7 +21,7 @@ class NoteAdapter(private val onClick: (Note) -> Unit) :
         return NoteViewHolder(
             ListItemNoteBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
-            ), onClick
+            )
         )
 
     }
@@ -32,8 +32,7 @@ class NoteAdapter(private val onClick: (Note) -> Unit) :
     }
 
     inner class NoteViewHolder(
-        private val binding: ListItemNoteBinding,
-        private val onClick: (Note) -> Unit
+        private val binding: ListItemNoteBinding
     ) :
         RecyclerView.ViewHolder(binding.root) {
 
@@ -53,9 +52,6 @@ class NoteAdapter(private val onClick: (Note) -> Unit) :
         fun bind(item: Note) {
             binding.apply {
                 noteView.text = item.title
-                deleteButton.setOnClickListener {
-                    onClick(item)
-                }
             }
         }
     }
