@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewmodel"
             type="com.anurag.notekeepingapp.viewmodels.EditNoteViewModel" />
@@ -12,22 +13,42 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginVertical="6dp"
         android:layout_marginHorizontal="14dp"
+        android:layout_marginVertical="6dp"
         tools:context=".ui.EditNoteFragment">
 
         <EditText
-            android:id="@+id/add_note_view"
+            android:id="@+id/note_title_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:background="@android:color/transparent"
+            android:hint="@string/title"
+            android:inputType="textMultiLine|textCapSentences"
+            android:padding="6dp"
             android:text="@={viewmodel.note.title}"
-            android:hint="@string/write_the_note_here"
-            android:importantForAutofill="no"
-            android:inputType="textMultiLine"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:textSize="20sp"
             app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="4dp"
+            tools:text="@string/title"
+            android:importantForAutofill="no" />
+
+        <EditText
+            android:id="@+id/note_description_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="4dp"
+            android:background="@android:color/transparent"
+            android:focusableInTouchMode="true"
             android:gravity="start"
-            tools:text="This is where note is edited." />
+            android:hint="@string/note"
+            android:inputType="textMultiLine|textCapSentences"
+            android:padding="6dp"
+            android:text="@={viewmodel.note.description}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/note_title_view"
+            tools:text="This is where note is edited."
+            android:importantForAutofill="no" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

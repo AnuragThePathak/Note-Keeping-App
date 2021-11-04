@@ -12,12 +12,12 @@ class NoteRepository @Inject constructor(private val noteDao: NoteDao) {
 
     @WorkerThread
     suspend fun initializeNote(noteId: Int): Note =
-        if (noteId == -1) Note(title = "")
+        if (noteId == -1) Note()
         else noteDao.getNoteById(noteId)
 
     @WorkerThread
     suspend fun submit(note: Note, noteId: Int): Int =
-        if (note.title != "") {
+        if (note.title != "" || note.description != "") {
             if (noteId == -1) {
                 note.id = noteDao.insert(note).toInt()
                 note.id

@@ -6,10 +6,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <EditText
-        android:id="@+id/add_note_view"
+        android:id="@+id/note_description_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/write_the_note_here"
+        android:hint="@string/note"
         android:importantForAutofill="no"
         android:inputType="text"
         app:layout_constraintBottom_toBottomOf="parent"
