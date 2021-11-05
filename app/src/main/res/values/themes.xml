@@ -15,5 +15,6 @@
 
         <item name="cardBackgroundColor">@color/cardview_light_background</item>
         <item name="backgroundColor">@color/background_color_light_note_list</item>
+        <item name="android:textCursorDrawable">@drawable/color_cursor</item>
     </style>
 </resources>
