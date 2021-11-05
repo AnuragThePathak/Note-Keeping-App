@@ -17,6 +17,6 @@
         <item name="cardBackgroundColor">@color/cardview_dark_background</item>
         <item name="editTextColor">@color/note_text_color</item>
         <item name="itemTextColor">@color/note_text_color</item>
-        <item name="colorAccent">#FFC107</item>
+        <item name="colorAccent">@android:color/holo_orange_light</item>
     </style>
 </resources>

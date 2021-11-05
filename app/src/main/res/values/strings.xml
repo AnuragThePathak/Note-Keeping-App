@@ -3,4 +3,6 @@
     <string name="note">Note</string>
     <string name="add_button">Add Button</string>
     <string name="title">Title</string>
+    <string name="settings">Settings</string>
+    <string name="change_theme">Change Theme</string>
 </resources>
