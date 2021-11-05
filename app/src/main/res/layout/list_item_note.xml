@@ -10,8 +10,7 @@
         android:id="@+id/note_card"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:cardCornerRadius="4dp"
-        app:cardBackgroundColor="@color/purple_200">
+        app:cardCornerRadius="6dp">
 
         <TextView
             android:id="@+id/note_view"
