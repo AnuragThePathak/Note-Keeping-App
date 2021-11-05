@@ -33,26 +33,31 @@ class NoteAdapter :
 
     inner class NoteViewHolder(
         private val binding: ListItemNoteBinding
-    ) :
-        RecyclerView.ViewHolder(binding.root) {
+    ) : RecyclerView.ViewHolder(binding.root) {
 
         init {
             itemView.setOnClickListener {
-                navigateToNote(adapterPosition, it)
+                navigateToNote(getItem(adapterPosition), it)
             }
-        }
-
-        private fun navigateToNote(position: Int, view: View) {
-            val direction = NoteListFragmentDirections
-                .actionNoteListDestToEditNoteDest(getItem(position).id)
-
-            view.findNavController().navigate(direction)
         }
 
         fun bind(item: Note) {
-            binding.apply {
-                noteView.text = item.title
+            binding.titleView.apply {
+                text = item.title
+                visibility = if (item.title != "") View.VISIBLE else View.GONE
             }
+
+            binding.descriptionView.apply {
+                text = item.description
+                visibility = if (item.description != "") View.VISIBLE else View.GONE
+            }
+        }
+
+        private fun navigateToNote(item: Note, view: View) {
+            val direction = NoteListFragmentDirections
+                .actionNoteListDestToEditNoteDest(item.id)
+
+            view.findNavController().navigate(direction)
         }
     }
 
