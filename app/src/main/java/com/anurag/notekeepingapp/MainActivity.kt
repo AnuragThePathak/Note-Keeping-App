@@ -30,9 +30,9 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.id != R.id.note_list_dest) {
-                supportActionBar?.setDisplayShowTitleEnabled(false)
-            } else supportActionBar?.setDisplayShowTitleEnabled(true)
+            if (destination.id != R.id.edit_note_dest) {
+                supportActionBar?.setDisplayShowTitleEnabled(true)
+            } else supportActionBar?.setDisplayShowTitleEnabled(false)
         }
     }
 

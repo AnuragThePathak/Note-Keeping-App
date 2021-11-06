@@ -33,6 +33,7 @@ class EditNoteFragment : Fragment() {
             inflater, container,
             false
         )
+
         binding.viewmodel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root

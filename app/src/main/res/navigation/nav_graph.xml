@@ -14,6 +14,10 @@
         <action
             android:id="@+id/action_note_list_dest_to_edit_note_dest"
             app:destination="@id/edit_note_dest" />
+
+        <action
+            android:id="@+id/action_note_list_dest_to_settings_dest"
+            app:destination="@id/settings_dest" />
     </fragment>
 
     <fragment
@@ -26,4 +30,9 @@
             app:argType="integer"
             android:defaultValue="-1" />
     </fragment>
+
+    <fragment
+        android:id="@+id/settings_dest"
+        android:name="com.anurag.notekeepingapp.ui.SettingsFragment"
+        android:label="Settings" />
 </navigation>
