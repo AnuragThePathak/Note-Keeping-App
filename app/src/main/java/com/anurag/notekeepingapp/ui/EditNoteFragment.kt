@@ -23,6 +23,7 @@ class EditNoteFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: EditNoteViewModel by viewModels()
+    private var showKeyboard: Boolean? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,7 +43,8 @@ class EditNoteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.noteDescriptionView.let {
+        showKeyboard = showKeyboard ?: (viewModel.id == -1)
+        if (showKeyboard as Boolean) binding.noteDescriptionView.let {
             it.requestFocus()
             showSoftKeyboard(it)
         }
@@ -57,6 +59,7 @@ class EditNoteFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        showKeyboard = null
     }
 
     private fun showSoftKeyboard(editText: EditText) {
@@ -64,5 +67,4 @@ class EditNoteFragment : Fragment() {
                 as InputMethodManager)
             .showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT)
     }
-
 }

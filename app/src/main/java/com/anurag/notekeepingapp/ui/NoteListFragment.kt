@@ -54,7 +54,7 @@ class NoteListFragment : Fragment() {
                 adapter.submitList(notes)
 
                 if (notes.isNotEmpty()) {
-                    binding.noNotesView.visibility = View.INVISIBLE
+                    binding.noNotesView.visibility = View.GONE
                 } else binding.noNotesView.visibility = View.VISIBLE
             }
         })
@@ -70,7 +70,7 @@ class NoteListFragment : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.note_list_top_menu, menu)
+        inflater.inflate(R.menu.menu_top_note_list, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean =
@@ -90,5 +90,4 @@ class NoteListFragment : Fragment() {
         _binding = null
         _navController = null
     }
-
 }

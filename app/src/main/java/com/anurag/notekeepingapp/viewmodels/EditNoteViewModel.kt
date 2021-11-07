@@ -18,6 +18,7 @@ class EditNoteViewModel @Inject constructor(
 ) : ViewModel() {
 
     private var noteId = savedStateHandle.get<Int>("note_id")!!
+    val id get() = noteId
     var note = MutableLiveData<Note>()
     /* 1. Initializing this Mutable Live Data doesn't initialize note.value.
        2. If we make note.value!!.title empty, it still doesn't become null.
