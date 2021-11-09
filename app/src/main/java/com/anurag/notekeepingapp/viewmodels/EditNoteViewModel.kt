@@ -20,6 +20,9 @@ class EditNoteViewModel @Inject constructor(
     private var noteId = savedStateHandle.get<Int>("note_id")!!
     val id get() = noteId
     var note = MutableLiveData<Note>()
+
+    val noteText get() = "${note.value?.title}\n${note.value?.description}"
+
     /* 1. Initializing this Mutable Live Data doesn't initialize note.value.
        2. If we make note.value!!.title empty, it still doesn't become null.
        3. Rather it becomes "" (i.e. String of zero length).
@@ -34,5 +37,9 @@ class EditNoteViewModel @Inject constructor(
     fun submitNote() = viewModelScope.launch(Dispatchers.IO) {
         noteId = repository.submit(note.value!!, noteId)
         savedStateHandle["note_id"] = noteId
+    }
+
+    fun deleteNote() = viewModelScope.launch(Dispatchers.IO) {
+        noteId = repository.delete(note.value!!)
     }
 }

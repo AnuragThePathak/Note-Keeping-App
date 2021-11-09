@@ -1,15 +1,14 @@
 package com.anurag.notekeepingapp.ui
 
-import android.content.Context.INPUT_METHOD_SERVICE
+import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.anurag.notekeepingapp.R
 import com.anurag.notekeepingapp.databinding.FragmentEditNoteBinding
+import com.anurag.notekeepingapp.utils.KeyboardUtils
 import com.anurag.notekeepingapp.viewmodels.EditNoteViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -23,7 +22,13 @@ class EditNoteFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: EditNoteViewModel by viewModels()
+    private var keyboardUtils: KeyboardUtils? = null
     private var showKeyboard: Boolean? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,12 +48,42 @@ class EditNoteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.bottomBar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.action_delete -> {
+                    viewModel.deleteNote()
+                    findNavController().popBackStack()
+                    true
+                }
+                R.id.action_share -> {
+                    shareNote(viewModel.noteText)
+                    true
+                }
+                else -> false
+            }
+        }
+
+        keyboardUtils = KeyboardUtils(this)
         showKeyboard = showKeyboard ?: (viewModel.id == -1)
         if (showKeyboard as Boolean) binding.noteDescriptionView.let {
             it.requestFocus()
-            showSoftKeyboard(it)
+            keyboardUtils!!.showSoftKeyboard(it)
         }
     }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_top_edit_note, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean =
+        when (item.itemId) {
+            R.id.action_submit -> {
+                viewModel.submitNote()
+                keyboardUtils?.hideKeyboard()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
 
     override fun onStop() {
         super.onStop()
@@ -59,12 +94,18 @@ class EditNoteFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        keyboardUtils = null
         showKeyboard = null
     }
 
-    private fun showSoftKeyboard(editText: EditText) {
-        (editText.context.getSystemService(INPUT_METHOD_SERVICE)
-                as InputMethodManager)
-            .showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT)
+    private fun shareNote(note: String) {
+        val sendIntent: Intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, note.trim())
+            type = "text/plain"
+        }
+
+        val shareIntent = Intent.createChooser(sendIntent, null)
+        startActivity(shareIntent)
     }
 }

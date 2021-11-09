@@ -32,7 +32,12 @@ class NoteRepository @Inject constructor(private val noteDao: NoteDao) {
         }
 
     @WorkerThread
-    suspend fun delete(note: Note) = noteDao.delete(note)
+    suspend fun delete(note: Note): Int {
+        noteDao.delete(note)
+        note.title = ""
+        note.description = ""
+        return -1
+    }
 
     fun getAllNotes() = noteDao.loadAllNotes()
 }
