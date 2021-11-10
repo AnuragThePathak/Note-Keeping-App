@@ -53,6 +53,7 @@ class EditNoteFragment : Fragment() {
             when (menuItem.itemId) {
                 R.id.action_delete -> {
                     viewModel.deleteNote()
+                    keyboardUtils?.hideKeyboard()
                     findNavController().popBackStack()
                     true
                 }
@@ -67,8 +68,6 @@ class EditNoteFragment : Fragment() {
         binding.noteTitleView.setRawInputType(
             InputType.TYPE_TEXT_FLAG_CAP_SENTENCES
         )
-
-        binding.bottomBar.visibility = View.GONE
 
         keyboardUtils = KeyboardUtils(this)
         showKeyboard = showKeyboard ?: (viewModel.id == -1)
