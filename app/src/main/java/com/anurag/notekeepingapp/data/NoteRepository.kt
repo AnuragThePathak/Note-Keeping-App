@@ -31,9 +31,7 @@ class NoteRepository @Inject constructor(private val noteDao: NoteDao) {
             -1
         }
 
-    @WorkerThread
-    suspend fun delete(note: Note): Int {
-        noteDao.delete(note)
+    fun delete(note: Note): Int {
         note.title = ""
         note.description = ""
         return -1

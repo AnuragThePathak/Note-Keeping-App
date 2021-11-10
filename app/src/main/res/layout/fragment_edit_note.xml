@@ -30,6 +30,7 @@
                 android:hint="@string/title"
                 android:importantForAutofill="no"
                 android:inputType="textMultiLine|textCapSentences"
+                android:imeOptions="actionNext"
                 android:padding="6dp"
                 android:text="@={viewmodel.note.title}"
                 android:textSize="20sp"

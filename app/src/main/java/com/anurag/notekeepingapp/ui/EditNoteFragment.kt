@@ -2,6 +2,7 @@ package com.anurag.notekeepingapp.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.InputType
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -62,6 +63,12 @@ class EditNoteFragment : Fragment() {
                 else -> false
             }
         }
+
+        binding.noteTitleView.setRawInputType(
+            InputType.TYPE_TEXT_FLAG_CAP_SENTENCES
+        )
+
+        binding.bottomBar.visibility = View.GONE
 
         keyboardUtils = KeyboardUtils(this)
         showKeyboard = showKeyboard ?: (viewModel.id == -1)

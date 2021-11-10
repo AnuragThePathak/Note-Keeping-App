@@ -39,7 +39,7 @@ class EditNoteViewModel @Inject constructor(
         savedStateHandle["note_id"] = noteId
     }
 
-    fun deleteNote() = viewModelScope.launch(Dispatchers.IO) {
+    fun deleteNote() {
         noteId = repository.delete(note.value!!)
     }
 }
