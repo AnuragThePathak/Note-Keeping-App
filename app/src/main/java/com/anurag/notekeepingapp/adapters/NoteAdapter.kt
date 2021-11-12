@@ -1,5 +1,6 @@
 package com.anurag.notekeepingapp.adapters
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,8 +41,8 @@ class NoteAdapter :
     ) : RecyclerView.ViewHolder(binding.root) {
 
         init {
-            itemView.setOnClickListener {
-                navigateToNote(getItem(adapterPosition), it)
+            binding.noteCard.setOnClickListener {
+                navigateToNote(getItem(bindingAdapterPosition), it)
             }
         }
 
@@ -56,7 +57,10 @@ class NoteAdapter :
                 visibility = if (item.description != "") View.VISIBLE else View.GONE
             }
 
-            itemView.isActivated = isSelected == true
+            if (isSelected == true) {
+                itemView.isActivated = true
+                binding.noteCard.setBackgroundColor(Color.RED)
+            } else binding.noteCard.setBackgroundColor(Color.CYAN)
         }
 
         private fun navigateToNote(item: Note, view: View) {
