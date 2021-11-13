@@ -13,4 +13,5 @@
     <color name="background_color_dark">#0D0C0C</color>
     <color name="card_background_color_dark">#FFFFFFFF</color>
     <color name="note_text_color">#EFE4E4</color>
+    <color name="list_choice_pressed_bg_light">#A99E9E</color>
 </resources>

@@ -1,24 +1,18 @@
 package com.anurag.notekeepingapp.adapters
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
-import androidx.recyclerview.selection.ItemDetailsLookup
-import androidx.recyclerview.selection.SelectionTracker
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.anurag.notekeepingapp.data.Note
 import com.anurag.notekeepingapp.databinding.ListItemNoteBinding
-import com.anurag.notekeepingapp.recyclerviewselection.NoteItemDetails
 import com.anurag.notekeepingapp.ui.NoteListFragmentDirections
 
 class NoteAdapter :
     ListAdapter<Note, NoteAdapter.NoteViewHolder>(NoteDiffCallBack) {
-
-    var selectionTracker: SelectionTracker<Long>? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):
             NoteViewHolder {
@@ -33,8 +27,10 @@ class NoteAdapter :
 
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item, selectionTracker?.isSelected(item.id.toLong()))
+        holder.bind(item)
     }
+
+    override fun getItemId(position: Int): Long = position.toLong()
 
     inner class NoteViewHolder(
         private val binding: ListItemNoteBinding
@@ -46,7 +42,7 @@ class NoteAdapter :
             }
         }
 
-        fun bind(item: Note, isSelected: Boolean?) {
+        fun bind(item: Note) {
             binding.titleView.apply {
                 text = item.title
                 visibility = if (item.title != "") View.VISIBLE else View.GONE
@@ -56,11 +52,6 @@ class NoteAdapter :
                 text = item.description
                 visibility = if (item.description != "") View.VISIBLE else View.GONE
             }
-
-            if (isSelected == true) {
-                itemView.isActivated = true
-                binding.noteCard.setBackgroundColor(Color.RED)
-            } else binding.noteCard.setBackgroundColor(Color.CYAN)
         }
 
         private fun navigateToNote(item: Note, view: View) {
@@ -70,11 +61,6 @@ class NoteAdapter :
             view.findNavController().navigate(direction)
         }
 
-        fun getItemDetails(): ItemDetailsLookup.ItemDetails<Long> =
-            NoteItemDetails(
-                bindingAdapterPosition,
-                getItem(bindingAdapterPosition).id.toLong()
-            )
     }
 }
 
