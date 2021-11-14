@@ -49,6 +49,10 @@ class EditNoteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.noteTitleView.setRawInputType(
+            InputType.TYPE_TEXT_FLAG_CAP_SENTENCES
+        )
+
         binding.bottomBar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.action_delete -> {
@@ -65,11 +69,7 @@ class EditNoteFragment : Fragment() {
             }
         }
 
-        binding.noteTitleView.setRawInputType(
-            InputType.TYPE_TEXT_FLAG_CAP_SENTENCES
-        )
-
-        keyboardUtils = KeyboardUtils(this)
+        _keyboardUtils = KeyboardUtils(this)
         showKeyboard = showKeyboard ?: (viewModel.id == -1)
         if (showKeyboard as Boolean) binding.noteDescriptionView.let {
             it.requestFocus()

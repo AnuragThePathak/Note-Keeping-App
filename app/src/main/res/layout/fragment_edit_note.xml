@@ -35,8 +35,8 @@
                     android:background="@android:color/transparent"
                     android:hint="@string/title"
                     android:imeOptions="actionNext"
-                    android:inputType="textMultiLine|textCapSentences"
                     android:importantForAutofill="no"
+                    android:inputType="textCapSentences|textMultiLine"
                     android:padding="6dp"
                     android:text="@={viewmodel.note.title}"
                     android:textSize="20sp"
@@ -66,8 +66,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            app:menu="@menu/menu_edit_note_bottombar"
-            app:layout_insetEdge="top" />
+            app:layout_insetEdge="top"
+            app:menu="@menu/menu_edit_note_bottombar" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

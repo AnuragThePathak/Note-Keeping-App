@@ -16,8 +16,5 @@
         <item name="cardBackgroundColor">@color/cardview_light_background</item>
         <item name="backgroundColor">@color/background_color_light_note_list</item>
         <item name="colorAccent">@color/design_default_color_secondary</item>
-
-        <!-- For selection -->
-        <item name="selectableItemBackground">@drawable/selector_item_light</item>
     </style>
 </resources>

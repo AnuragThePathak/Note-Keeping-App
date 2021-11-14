@@ -2,26 +2,19 @@ package com.anurag.notekeepingapp.ui
 
 import android.os.Bundle
 import android.view.*
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.view.ActionMode
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.anurag.notekeepingapp.R
-import com.anurag.notekeepingapp.adapters.MyItem
+import com.anurag.notekeepingapp.adapters.NoteAdapter
 import com.anurag.notekeepingapp.databinding.FragmentNoteListBinding
 import com.anurag.notekeepingapp.viewmodels.NoteListViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import eu.davidea.flexibleadapter.FlexibleAdapter
-import eu.davidea.flexibleadapter.SelectableAdapter
-import eu.davidea.flexibleadapter.helpers.ActionModeHelper
-import eu.davidea.flexibleadapter.items.IFlexible
 
 
 @AndroidEntryPoint
-class NoteListFragment : Fragment(),
-    FlexibleAdapter.OnItemLongClickListener, ActionMode.Callback {
+class NoteListFragment : Fragment() {
 
     private var _binding: FragmentNoteListBinding? = null
 
@@ -31,10 +24,8 @@ class NoteListFragment : Fragment(),
     private var _navController: NavController? = null
     private val navController get() = _navController!!
 
-    private var _adapter: FlexibleAdapter<IFlexible<*>>? = null
-    val adapter get() = _adapter!!
-
-    private var mActionModeHelper: ActionModeHelper? = null
+    private var _adapter: NoteAdapter? = null
+    private val adapter get() = _adapter!!
 
     private val viewModel: NoteListViewModel by viewModels()
 
@@ -52,30 +43,19 @@ class NoteListFragment : Fragment(),
             inflater, container,
             false
         )
-        registerForContextMenu(binding.root)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val myItems = ArrayList<IFlexible<*>>()
-
-        _adapter = FlexibleAdapter(myItems)
+        _adapter = NoteAdapter()
         val recyclerView = binding.myRecyclerView
         recyclerView.adapter = adapter
 
-        initializeActionModeHelper(SelectableAdapter.Mode.IDLE)
-        adapter.addListener(this)
-
         viewModel.allNotes.observe(viewLifecycleOwner, { notes ->
             notes.let {
-                val list = ArrayList<IFlexible<*>>()
-                it.forEach { note ->
-                    list.add(MyItem(note))
-                }
-
-                adapter.updateDataSet(list, true)
+                adapter.submitList(it)
 
                 if (notes.isNotEmpty()) {
                     binding.noNotesView.visibility = View.GONE
@@ -94,8 +74,6 @@ class NoteListFragment : Fragment(),
 
                 navController.navigate(action)
             }
-
-
         })
     }
 
@@ -121,42 +99,5 @@ class NoteListFragment : Fragment(),
         _binding = null
         _navController = null
         _adapter = null
-    }
-
-    override fun onItemLongClick(position: Int) {
-        mActionModeHelper?.onLongClick(activity as AppCompatActivity?, position)
-    }
-
-
-    private fun initializeActionModeHelper(@SelectableAdapter.Mode mode: Int) {
-        //this = ActionMode.Callback instance
-        mActionModeHelper = object : ActionModeHelper(
-            adapter,
-            R.menu.menu_top_action_mode, this
-        ) {
-            // Override to customize the title
-            override fun updateContextTitle(count: Int) {
-                // You can use the internal mActionMode instance
-                if (mActionMode != null) {
-                    mActionMode.title = if (count == 1) "1" else count.toString()
-                }
-            }
-        }.withDefaultMode(mode)
-    }
-
-    override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
-        return false
-    }
-
-    override fun onPrepareActionMode(mode: ActionMode?, menu: Menu?): Boolean {
-        return false
-    }
-
-    override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?): Boolean {
-        return false
-    }
-
-    override fun onDestroyActionMode(mode: ActionMode?) {
-
     }
 }
