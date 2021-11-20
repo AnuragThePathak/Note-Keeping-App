@@ -53,16 +53,19 @@ class NoteListFragment : Fragment() {
         val recyclerView = binding.myRecyclerView
         recyclerView.adapter = adapter
 
+        val stub = view.findViewById<ViewStub>(R.id.stub_import)
+
         viewModel.allNotes.observe(viewLifecycleOwner, { notes ->
             notes.let {
                 adapter.submitList(it)
 
                 if (notes.isNotEmpty()) {
-                    binding.noNotesView.visibility = View.GONE
+
+                    stub.visibility = View.GONE
                     recyclerView.visibility = View.VISIBLE
                 } else {
                     recyclerView.visibility = View.GONE
-                    binding.noNotesView.visibility = View.VISIBLE
+                    stub.visibility = View.VISIBLE
                 }
             }
 

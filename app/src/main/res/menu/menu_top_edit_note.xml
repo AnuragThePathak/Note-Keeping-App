@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_undo"
+        android:icon="@drawable/ic_baseline_undo_24"
+        app:showAsAction="always"
+        android:title="@string/submit" />
+
+    <item
+        android:id="@+id/action_redo"
+        android:icon="@drawable/ic_baseline_redo_24"
+        app:showAsAction="always"
+        android:title="@string/submit" />
+
     <item
         android:id="@+id/action_submit"
         android:icon="@drawable/ic_baseline_done_24"
-        app:showAsAction="always"
+        app:showAsAction="ifRoom"
         android:title="@string/submit" />
 </menu>

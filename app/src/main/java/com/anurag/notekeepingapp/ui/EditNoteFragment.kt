@@ -88,6 +88,9 @@ class EditNoteFragment : Fragment() {
                 keyboardUtils?.hideKeyboard()
                 true
             }
+//            R.id.action_undo -> {
+//                binding.noteTitleView.text = recentTitles?.
+//            }
             else -> super.onOptionsItemSelected(item)
         }
 
