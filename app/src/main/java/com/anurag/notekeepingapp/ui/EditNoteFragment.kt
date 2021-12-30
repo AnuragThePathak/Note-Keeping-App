@@ -23,7 +23,8 @@ class EditNoteFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: EditNoteViewModel by viewModels()
-    private var keyboardUtils: KeyboardUtils? = null
+    private var _keyboardUtils: KeyboardUtils? = null
+    private val keyboardUtils get() = _keyboardUtils!!
     private var showKeyboard: Boolean? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,7 +58,7 @@ class EditNoteFragment : Fragment() {
             when (menuItem.itemId) {
                 R.id.action_delete -> {
                     viewModel.deleteNote()
-                    keyboardUtils?.hideKeyboard()
+                    keyboardUtils.hideKeyboard()
                     findNavController().popBackStack()
                     true
                 }
@@ -73,7 +74,7 @@ class EditNoteFragment : Fragment() {
         showKeyboard = showKeyboard ?: (viewModel.id == -1)
         if (showKeyboard as Boolean) binding.noteDescriptionView.let {
             it.requestFocus()
-            keyboardUtils!!.showSoftKeyboard(it)
+            keyboardUtils.showSoftKeyboard(it)
         }
     }
 
@@ -85,7 +86,7 @@ class EditNoteFragment : Fragment() {
         when (item.itemId) {
             R.id.action_submit -> {
                 viewModel.submitNote()
-                keyboardUtils?.hideKeyboard()
+                keyboardUtils.hideKeyboard()
                 true
             }
 //            R.id.action_undo -> {
@@ -103,7 +104,7 @@ class EditNoteFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-        keyboardUtils = null
+        _keyboardUtils = null
         showKeyboard = null
     }
 
