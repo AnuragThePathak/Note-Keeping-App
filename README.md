@@ -2,8 +2,13 @@
 
 It is a note keeping app which allows you to create, edit, delete and share notes. Its design and features are mostly inspired by Google Keep and Mi notes.
 
-- Gradle Version: 7.0.3
-- Kotlin Version: 1.6.0
+- Gradle Version: 7.0.4
+- Kotlin Version: 1.6.10
+
+## Features available till now
+
+- Create, edit, delete and share notes.
+- Support of dark and light theme, depending on the system settings (you can't change manually though at this moment).
 
 ## Built With 🛠
 
