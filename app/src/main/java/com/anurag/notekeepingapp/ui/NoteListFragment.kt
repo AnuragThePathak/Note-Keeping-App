@@ -55,7 +55,7 @@ class NoteListFragment : Fragment() {
 
         val stub = view.findViewById<ViewStub>(R.id.stub_import)
 
-        viewModel.allNotes.observe(viewLifecycleOwner, { notes ->
+        viewModel.allNotes.observe(viewLifecycleOwner) { notes ->
             notes.let {
                 adapter.submitList(it)
 
@@ -77,7 +77,7 @@ class NoteListFragment : Fragment() {
 
                 navController.navigate(action)
             }
-        })
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
